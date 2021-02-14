@@ -5,16 +5,15 @@
 /********************************/
 /* Description:                 */
 /* Validation Checks: must be   */
-/*     passed at least 10 bytes */
-/* Enhancements:                */
+/*    passed at least 10 shorts */
+/* Enhancements: 16-bit         */
 /********************************/
 
 #include "stdio.h"
 #include "stdlib.h"
 #include <unistd.h>
 
-#define max_int (255)
-#define byte unsigned char
+#define max_int (1 << 16) - 1
 
 #define checksum_index 5
 
@@ -22,11 +21,11 @@ int main (int argc, char * argv[], char ** envp) {
 
 	int count = 10;
 	int sum = 0;   
-	byte checksum; 
-	byte complement;
-	byte *buffer = malloc(sizeof(byte[count])); // allocate buffer
+	unsigned short checksum; 
+	unsigned short complement;
+	unsigned short *buffer = malloc(sizeof(short[count])); // allocate buffer
 
-	if(read(0, (void*)buffer, count) < count) {
+	if(read(0, (void*)buffer, sizeof(short) * count) < sizeof(short) * count) {
 		fprintf(stderr, "Error: input must be at least %i bytes!\n", count);
 		return 2;
 	}
