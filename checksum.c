@@ -1,7 +1,7 @@
 /********************************/
-/* Program Name:                */
-/* Author:                      */
-/* Date:                        */
+/* Program Name: checksum.c     */
+/* Author: Ryan Larson          */
+/* Date: 2/14/21                */
 /********************************/
 /* Description:                 */
 /* Validation Checks:           */
@@ -17,18 +17,25 @@
 
 int main (int argc, char * argv[], char ** envp) {
 
-  int count = 10;
-  int sum = 0;   
-  byte checksum; 
-  byte complement;
+	int count = 10;
+	int sum = 0;   
+	byte checksum; 
+	byte complement;
+	byte *buffer = malloc(sizeof(byte[10])); // allocate buffer
 
-  /* the following is the prototype for the read system call */
-  /* int read(int fildes, void *buf, size_t nbyte);  */
+	if(read(int fildes, void *buf, size_t nbyte) != 10) {
+		fprintf(stdout, "Error: input must equal 10 bytes!\n");
+		return 2;
+	}
 
-  fprintf(stdout, "Stored Checksum: %d, Computed Checksum: %d\n", checksum, complement);
-  if (checksum != complement ) {
-    fprintf(stderr, "Error Detected!\n"); 
-    return 1;
-  }
-  return 0;
+	for(int i = 0; i < 10; i++) {
+		
+	}
+
+	fprintf(stdout, "Stored Checksum: %d, Computed Checksum: %d\n", checksum, complement);
+	if (checksum != complement ) {
+		fprintf(stderr, "Error Detected!\n"); 
+		return 1;
+	}
+	return 0;
 }
